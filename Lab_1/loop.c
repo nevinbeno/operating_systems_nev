@@ -5,7 +5,7 @@ int main ()
 	while(1)
 	{
 		printf("Running...\n");
-		fflush(stdout);
+		fflush(stdout); // make it to line buffer mode
 		sleep(5);
 	}
 	return 0;
