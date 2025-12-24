@@ -91,12 +91,10 @@ $ ps -o pid,ppid,stat,cmd -p 4700 # $ ps -o pid,ppid,stat,cmd -p <PID>
 ```
 
 ## Theory: 
-> What happens when you open a terminal?
-> You click Terminal
-> OS starts a terminal emulator process
-> (e.g. gnome-terminal)
-> That terminal emulator creates another process:
-> 👉 the shell (bash, zsh, etc.)
+> What happens when you open a terminal?<br>
+> - You click Terminal<br>
+> - OS starts a terminal emulator process (e.g. gnome-terminal)<br>
+> - That terminal emulator creates another process: the shell (bash, zsh, etc.)<br>
 
 - **terminal emulator** is a process, and it runs a shell(bash), which become the parent of its commands. Shell (bash) is a process created by the terminal emulator. 
 - Since each shell is also a process, 
