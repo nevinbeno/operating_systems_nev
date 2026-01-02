@@ -7,6 +7,7 @@ int main ()
 	time_t t;
 	time(&t);
 	printf("Current time is: %s\n", ctime(&t));
-	sleep(10);
+	fflush(stdout);
+	sleep(20);
 	return 0;
 }
