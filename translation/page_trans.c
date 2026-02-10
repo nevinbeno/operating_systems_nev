@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void validate(int argc)
-{
-	
-}
-
 int main (int argc, char *argv[])
 {
 	if (argc != 4)
