@@ -14,6 +14,7 @@ struct process_metadata
 	
 	int arrival_time;
 	int burst_time;
+	int priority;
 	
 	int remaining_time; // rr
 	int completion_time;
