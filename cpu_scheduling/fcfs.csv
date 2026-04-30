@@ -1,4 +1,0 @@
-Process ID, Arrival Time, Burst Time, Completion Time, Turn Around Time, Waiting time
-P0, 0, 5, 5, 5, 0
-P2, 2, 3, 8, 6, 3
-P1, 4, 6, 14, 10, 4
