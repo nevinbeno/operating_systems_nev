@@ -1,4 +1,34 @@
-# Endian-ness
+# Endianness
+- It is an byte ordering technique. 
+- Say, you have an integer variable `x`, and it takes 4 bytes, say byte0, byte1, byte2, byte3. 
+- Let the base address be A. 
+- There are two possible scenarios of arranging these bytes: 
+    ```
+    A: byte0
+    A + 1: byte1
+    A + 2: byte2
+    A + 3: byte3
+
+    or
+
+    A: byte3
+    A + 1: byte2
+    A + 2: byte1
+    A + 3: byte0
+    ```
+- Endianness decides which one the ordering is followed by your system. 
+_______
+## How to know the Byte Ordering of your system ? 
+- Linux: Open terminal and type: 
+    ```bash
+    lscpu | grep "Byte Order"
+    ```
+
+    Expected output: 
+    ```
+    Byte Order:                              Little Endian
+    ```    
+## Example: 
 - Consider the given scenario: 
 - Example: 
     ```c
@@ -55,11 +85,11 @@ _____________
     int* i = (int*)&x;
     ```
 
-|         Command           |   Big Endian  |   Little Endian   |
-| ---                       | ---           | ---               |
-|   printf("%x", (int)*c);  |      0x12     |       0x78        |
-|   printf("%x", (int)*s);  |      0x1234   |       0x5678      |
-|   printf("%x", (int)*i);  |    0x12345678 |     0x12345678    |
+    |         Command           |   Big Endian  |   Little Endian   |
+    | ---                       | ---           | ---               |
+    |   printf("%x", (int)*c);  |      0x12     |       0x78        |
+    |   printf("%x", (int)*s);  |      0x1234   |       0x5678      |
+    |   printf("%x", (int)*i);  |    0x12345678 |     0x12345678    |
 
 - All the variables are made to point to the same memory location; that is `&x`. 
 - The difference is that, 
