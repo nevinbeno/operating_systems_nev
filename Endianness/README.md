@@ -68,7 +68,7 @@ _______
 ## Little Endian
 - A byte - ordering technique, in which the Least Significant Byte of a multi - byte data type is stored in the lowest memory address. 
 - The least significant Byte goes into the Lowest address. 
-- CPU rearranges the content before printing. 
+- The CPU reads bytes as per endianness; no rearrangement happens during printing.
     ```c
     0x7ffc56e6b8bc: 0x78
     0x7ffc56e6b8bd: 0x56
