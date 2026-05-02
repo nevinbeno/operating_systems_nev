@@ -1,5 +1,6 @@
 # Page Replacement Algorithms
-
+- [LRU](#lru-least-recently-used)
+- [FIFO](#fifo-first-in-first-out)
 ## LRU (Least Recently Used)
 - The content of the frame which was least recently updated is selected to replace. 
 ### Algorithm (Doubly Linked List & Hash Table):
@@ -50,7 +51,7 @@
 _______
 ## FIFO (First In First Out)
 - The data in the very first occupied frame gets replaced. 
-### Algorithm (Unordered set + Deque)
+### Algorithm (Unordered Set + Deque)
 - Start. 
 - Initialize an unorderd set and deque. 
     ```cpp
