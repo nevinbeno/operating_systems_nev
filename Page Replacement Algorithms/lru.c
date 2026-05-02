@@ -39,7 +39,7 @@ struct hash_table* create_table(int cap)
     if (ht == NULL)
     {
         printf("Error in creating hash table; Exiting\n");
-        return EXIT_FAILURE;
+        exit(0);
     }
     ht->capacity = cap;
     ht->current_size = 0;
@@ -82,7 +82,7 @@ void insert_update(struct hash_table* ht, int key, struct node* addr)
     if (new == NULL)
     {
         printf("Error: hash table entry creation failed. Exiting...\n");
-        return EXIT_FAILURE;
+        exit(0);
     }
     new->page_no = key;
     new->node_address = addr;
@@ -93,19 +93,45 @@ void insert_update(struct hash_table* ht, int key, struct node* addr)
     return;
 }
 
+void delete_hash_entry(struct hash_table* ht, int key)
+{
+    unsigned int id = hash_function(key, ht->capacity);
+    struct hash_entry* head = NULL;
+    struct hash_entry* prev = NULL;
+    head = ht->buckets[id];
+    while(head)
+    {
+        if (head->page_no == key)
+        {
+            if (prev)
+                prev->next = head->next;
+            else
+                ht->buckets[id] = head->next;
+            free(head);
+            ht->current_size--;
+            return;
+        }
+        else
+        {
+            prev = head;
+            head = head->next;
+        }    
+    }
+}
+
 struct node* create_node(int x)
 {
-    struct node* p = malloc(sizeof(struct node));
-    p->lptr = NULL;
-    p->rptr = NULL;
-    p->value = x;
+    struct node* p = NULL;
+    p = malloc(sizeof(struct node));
     if (p == NULL)
     {
         printf("Error: Node creation failed, Program exiting\n");
-        return EXIT_FAILURE;
+        exit(0);
     }
-    else
-        return p;
+    p->lptr = NULL;
+    p->rptr = NULL;
+    p->value = x;
+    return p;
 }
 
 void lru_algorithm(int no_of_pages, int* req, int no_of_frames, int* frame_arr)
