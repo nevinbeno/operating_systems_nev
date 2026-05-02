@@ -6,6 +6,7 @@ using namespace std;
 
 void lru_algorithm(int pages, vector<int>& req, int frames)
 {
+    int no_misses;
     list<int> dll;
     unordered_map<int, list<int>::iterator> hash_table;
     for (int i = 0; i < pages; i++)
@@ -19,6 +20,7 @@ void lru_algorithm(int pages, vector<int>& req, int frames)
         }
         else // not in hash table
         {
+            no_misses++;
             if (dll.size() >= frames)
             {
                 int value_of_popped = dll.back();
@@ -29,6 +31,9 @@ void lru_algorithm(int pages, vector<int>& req, int frames)
                 hash_table[key] = dll.begin();
         }
     }
+    cout<<"The total no. of pages: "<<pages<<endl;
+    cout<<"Total no of page misses: "<<no_misses<<endl;
+    cout<<"Total no of page hits: "<<pages - no_misses<<endl;
     cout<<"The final configuration of the frames: "<<endl;
     for (int element : dll)
         cout<<element<<" ";
