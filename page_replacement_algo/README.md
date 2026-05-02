@@ -39,5 +39,8 @@
     ```
 - Now, the final configuration of DLL will give you the pages in the frames!
 - Stop.
+
+### Code: 
+- [Code implemented in C++](lru.cpp)
 _______
 ## FIFO (First In First Out)
