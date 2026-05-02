@@ -8,12 +8,59 @@ struct node
     struct node* rptr;
 };
 
-struct hashEntry
+struct hash_entry
 {
-    int page;
-    struct node* address;
-    struct hashEntry* next;
+    int page_no; // key
+    struct node* node_address; // value
+    struct hash_entry* next;
 };
+
+struct hash_table
+{
+    int capacity;
+    int current_size;
+    struct hash_entry** buckets;
+};
+
+unsigned int hash_function(int key, int capacity)
+{
+    key ^= (key >> 16);
+    key *= 0x7feb352d;
+    key ^= (key >> 15);
+    key *= 0x846ca68b;
+    key ^= (key >> 16);
+    return key % capacity;
+}
+
+struct hash_table* create_table(int cap)
+{
+    struct hash_table* ht = NULL;
+    ht = (struct hash_table*)malloc(sizeof(struct hash_table));
+    if (ht == NULL)
+    {
+        printf("Error in creating hash table; Exiting\n");
+        return EXIT_FAILURE;
+    }
+    ht->capacity = cap;
+    ht->current_size = 0;
+    ht->buckets = (struct hash_entry**)calloc(cap, sizeof(struct node*));
+    return ht;
+}
+
+struct node* search(struct hash_table* ht, int key)
+{
+    unsigned int index = hash_function(key, ht->capacity);
+    struct hash_entry* head = ht->buckets[index];
+    while (head)
+    {
+        if (head->page_no == key)
+            return head->node_address;
+        else
+            head = head->next;
+    }
+    return NULL;
+}
+
 
 struct node* create_node(int x)
 {
@@ -21,7 +68,13 @@ struct node* create_node(int x)
     p->lptr = NULL;
     p->rptr = NULL;
     p->value = x;
-    return p;
+    if (p == NULL)
+    {
+        printf("Error: Node creation failed, Program exiting\n");
+        return EXIT_FAILURE;
+    }
+    else
+        return p;
 }
 
 void lru_algorithm(int no_of_pages, int* req, int no_of_frames, int* frame_arr)
