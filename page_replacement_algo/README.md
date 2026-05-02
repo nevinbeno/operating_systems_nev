@@ -41,6 +41,32 @@
 - Stop.
 
 ### Code: 
-- [Code implemented in C++](lru.cpp)
+- [Code implemented in C++](lru.cpp)<br>
+    Compile: 
+    ```bash
+    g++ lru.cpp -o bin/lru
+    ./bin/lru
+    ```
 _______
 ## FIFO (First In First Out)
+- The data in the very first occupied frame gets replaced. 
+### Algorithm (Unordered set + Deque)
+- Start. 
+- Initialize an unorderd set and deque. 
+    ```cpp
+    unordered_set<int> s;
+    deque<int> q; // no of elements should not exceed frame count
+    ```
+- For each element, 
+    ```txt
+    if it is in the set
+        do nothing!
+    else
+        if size of deque >= frames
+            pop from front of deque
+            remove the element from the set
+        insert the new element into the back
+        add the new element into the set. 
+    ```
+- Now, the final configuration of deque will give you the pages in the frames!
+- Stop.
