@@ -1,12 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define HASH_TABLE_CAPACITY 50
+
+int no_of_nodes = 0;
+
 struct node
 {
     int value;
     struct node* lptr;
     struct node* rptr;
 };
+
+struct node* tail = NULL;
 
 struct hash_entry
 {
@@ -43,7 +49,7 @@ struct hash_table* create_table(int cap)
     }
     ht->capacity = cap;
     ht->current_size = 0;
-    ht->buckets = (struct hash_entry**)calloc(cap, sizeof(struct node*));
+    ht->buckets = (struct hash_entry**)calloc(cap, sizeof(struct hash_entry*));
     return ht;
 }
 
@@ -134,21 +140,109 @@ struct node* create_node(int x)
     return p;
 }
 
-void lru_algorithm(int no_of_pages, int* req, int no_of_frames, int* frame_arr)
+struct node* insert_node(struct node* head, int key)
+{
+    struct node* new = NULL;
+    new = create_node(key);
+    if (head == NULL)
+    {
+        head = new;
+        tail = head;
+    }
+    else
+    {
+        head->lptr = new;
+        new->rptr = head;
+        head = new;
+    }
+    no_of_nodes++;
+    return head;
+}
+
+struct node* delete_node(struct node* head)
+{
+    if (head && head->rptr == NULL) // single node case
+    {
+        free (head);
+        head = NULL;
+        tail = NULL;
+        no_of_nodes = 0;
+    }
+    else
+    {
+        struct node* rmv = tail;
+        tail = tail->lptr;
+        if (tail)
+            tail->rptr = NULL;
+        free(rmv);
+        no_of_nodes--;
+    }
+    return head;
+}
+
+void lru_algorithm(int no_of_pages, int* req, int no_of_frames)
 {
     struct node* head = NULL;
+    struct hash_table* ht = NULL;
+    ht = create_table(HASH_TABLE_CAPACITY);
     for (int i = 0; i < no_of_pages; i++)
     {
         if (head == NULL)
         {
-            struct node* new = create_node(req[i]);
-            head = new;
+            head = insert_node(head, req[i]);
+            insert_update(ht, head->value, head);
         }
         else
         {
-
+            // the DLL is not empty. 
+            struct node* check = NULL;
+            check = search(ht, req[i]);
+            if (check) // the page entry is found... then just reordering is enough
+            {
+                if (check != head)
+                {
+                    struct node* left = NULL;
+                    struct node* right = NULL;
+                    right = check->rptr;
+                    left = check->lptr;
+                    if (left)
+                    {
+                        if (tail == check)
+                            tail = left;
+                        left->rptr = right;
+                        if (right)
+                            right->lptr = left;
+                    }
+                    check->lptr = NULL;
+                    check->rptr = head;
+                    head->lptr = check;
+                    head = check;
+                }    
+            }
+            else
+            {
+                if (no_of_nodes >= no_of_frames)
+                {
+                    // delete the least recently used node
+                    delete_hash_entry(ht, tail->value);
+                    head = delete_node(head);
+                }
+                // insert a new node the left of head node in DLL. 
+                head = insert_node(head, req[i]);
+                // make a hash table entry
+                insert_update(ht, req[i], head);
+            }
         }
     }
+
+    printf("\nThe final structure of the Frames: \n");
+    struct node* temp = head;
+    while(temp)
+    {
+        printf("%d, ", temp->value);
+        temp = temp->rptr;
+    }
+    printf("\nDONE!\n");
 }
 
 int main ()
@@ -163,16 +257,9 @@ int main ()
         printf("Page %d: ", i + 1);
         scanf("%d", &page_request[i]);
     }
-
     int no_of_frames;
-    scanf("Enter the no. of frames: ");
-    scanf("%d", &no_of_frames);
-    int frame_arr[no_of_frames];
-    for (int i = 0; i < no_of_frames; i++)
-        frame_arr[i] = -1;
-    
-    printf("The final structure of the frames: \n");
-    for (int i = 0; i < no_of_frames; i++)
-        
+    printf("Enter the no. of frames: ");
+    scanf("%d", &no_of_frames);  
+    lru_algorithm(no_of_pages, page_request, no_of_frames);
     return 0;
 }
