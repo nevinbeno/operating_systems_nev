@@ -61,6 +61,37 @@ struct node* search(struct hash_table* ht, int key)
     return NULL;
 }
 
+void insert_update(struct hash_table* ht, int key, struct node* addr)
+{
+    struct hash_entry* head = NULL;
+    unsigned int id = hash_function(key, ht->capacity);
+    head = ht->buckets[id];
+    while(head) // if found => update
+    {
+        if (head->page_no == key)
+        {
+            head->node_address = addr;
+            return;
+        }
+        else
+            head = head->next;
+    }
+    // if not found, then, fresh insert
+    struct hash_entry* new = NULL;
+    new = (struct hash_entry*)malloc(sizeof(struct hash_entry));
+    if (new == NULL)
+    {
+        printf("Error: hash table entry creation failed. Exiting...\n");
+        return EXIT_FAILURE;
+    }
+    new->page_no = key;
+    new->node_address = addr;
+    new->next = ht->buckets[id];
+    ht->buckets[id] = new;
+    ht->current_size++;
+
+    return;
+}
 
 struct node* create_node(int x)
 {
