@@ -6,7 +6,7 @@ using namespace std;
 
 void lru_algorithm(int pages, vector<int>& req, int frames)
 {
-    int no_misses;
+    int no_misses = 0;
     list<int> dll;
     unordered_map<int, list<int>::iterator> hash_table;
     for (int i = 0; i < pages; i++)
