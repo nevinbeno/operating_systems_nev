@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_set>
 #include <deque>
+#include <vector>
 
 using namespace std;
 
@@ -21,7 +22,7 @@ class FIFO
             no_misses = 0; // initializing
             total_page_requests = 0;
         }
-        void allocate(int key) // allocates pages to frames
+        void access(int key) // accesss pages to frames
         {
             total_page_requests++;
             if (s.find(key) == s.end())
@@ -36,40 +37,47 @@ class FIFO
                 q.push_back(key);
             }
         }
-        void display_current_frame_state() const
+        vector<int> get_frame_state() const
         {
-            cout<<"Current configuration of Frames: "<<endl;
-            if (q.empty())
-                cout<<"Empty; No frame is allotted to any page.";
-            else
-            {
-                for (int element: q)
-                    cout<<element<<" ";
-            }
-            cout<<endl;
+            return vector<int>(q.begin(), q.end());
         }
-        void display_current_status() const
+        int get_misses() const
         {
-            cout<<"The current status (Total request, Misses, Hits)"<<endl;
-            cout<<"Total no of pages requested: "<<total_page_requests<<endl;
-            cout<<"Total misses: "<<no_misses<<endl;
-            cout<<"Total hits: "<<total_page_requests - no_misses<<endl;
+            return no_misses;
+        }
+        int get_hits() const
+        {
+            return (total_page_requests - no_misses);
+        }
+        int get_total_requests_made() const
+        {
+            return total_page_requests;
+        }
+        int get_no_of_frames_allotted()
+        {
+            return q.size();
         }
 };
 
 int main ()
 {
     FIFO cache(3);
-    cache.display_current_frame_state();
-    cache.display_current_status();
-    cache.allocate(8);
-    cache.allocate(1);
-    cache.allocate(7);
-    cache.allocate(6);
-    cache.allocate(8);
-    cache.allocate(7);
-    cache.allocate(8);
-    cache.display_current_frame_state();
-    cache.display_current_status();
+    cache.access(8);
+    cache.access(1);
+    cache.access(7);
+    cache.access(6);
+    cache.access(8);
+    cache.access(7);
+    cache.access(8);
+    cout<<"The final frame state: "<<endl;
+    vector<int> arr = cache.get_frame_state();
+    for (int x: arr)
+        cout<<x<<" ";
+    cout<<endl;
+    cout<<"Total no of requests: "<<cache.get_total_requests_made()<<endl;
+    cout<<"Total no of misses: "<<cache.get_misses()<<endl;
+    cout<<"Total no of hits: "<<cache.get_hits()<<endl;
+    
+
     return 0;
 }
