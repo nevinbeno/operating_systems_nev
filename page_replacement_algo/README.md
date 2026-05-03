@@ -71,3 +71,11 @@ _______
     ```
 - Now, the final configuration of deque will give you the pages in the frames!
 - Stop.
+___
+### Code: 
+- [Code implemented in C++](fifo.cpp)<br>
+    Compile: 
+    ```bash
+    g++ fifo.cpp -o bin/fifo
+    ./bin/lru
+    ```
