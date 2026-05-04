@@ -1,4 +1,4 @@
-#include "fifo.hpp"
+#include "../include/FIFO.hpp"
 #include <stdexcept>
 
 FIFO::FIFO(int no_of_frames)
