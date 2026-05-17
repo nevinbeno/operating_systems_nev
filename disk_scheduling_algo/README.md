@@ -22,22 +22,7 @@
 ## 3. LOOK
 ```c
     int look(int* arr, int size, int head)
-    {    int c_look(int* arr, int n, int head)
     {
-        if (n == 1)
-            return abs(head - arr[0]);
-        qsort(arr, n, sizeof(int), compare);
-        if (head >= arr[n - 1])
-            return head - arr[0];
-        else if (head < arr[0]) // jump
-            return abs(arr[n - 1] - head) + abs(arr[n - 1] - arr[0]);
-        else
-        {
-            int index = binarySearch(arr, n, head);
-            index++;
-            return (head - arr[0]) + (arr[n - 1] - arr[0]) + abs(arr[n - 1] - arr[index]);
-        }
-    }
         qsort(arr, size, sizeof(int), compare);
         int sum = 0;
         sum += abs(arr[0] - arr[size -1]);
