@@ -2,6 +2,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+int fcfs(int*arr, int n, int head)
+{
+    int sum = 0;
+    sum += abs(head - arr[0]);
+    for (int i = 0; i < n - 1; i++)
+        sum += abs(arr[i] - arr[i + 1]);
+    return sum;
+}
+
 int main ()
 {
     int n_req, start;
@@ -15,10 +24,6 @@ int main ()
     for (int i = 0; i < n_req; i++)
         scanf("%d", &arr[i]);
     
-    int sum = 0;
-    for (int i = 0; i < n_req - 1; i++)
-        sum += abs(arr[i] - arr[i + 1]);
-    sum += abs(arr[0] - start);
-    printf("The total head movements: %d\n", sum);
+    int ans = fcfs(arr, n_req, start);
     return 0;
 }
