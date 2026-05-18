@@ -1,5 +1,5 @@
-# OS - based Algorithms
-![C](https://img.shields.io/badge/C-blue?logo=c)
+# OS - Based Algorithms
+![C](https://img.shields.io/badge/C-Programming-blue?logo=c)
 ![C++](https://img.shields.io/badge/C++-OOP-blue?logo=cplusplus)
 ![Linux](https://img.shields.io/badge/Linux-System_Programming-black?logo=linux)
 ![OS](https://img.shields.io/badge/Subject-Operating_Systems-orange)
