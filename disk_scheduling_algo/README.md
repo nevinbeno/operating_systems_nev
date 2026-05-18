@@ -1,4 +1,5 @@
-# Disk Scheduling Algos: 
+# Disk Scheduling Algorithms
+![Disk Scheduling](https://img.shields.io/badge/Concept-Disk_Scheduling-yellow)
 ## 1. FCFS
 ```c
     int sum = 0;
