@@ -8,5 +8,5 @@
 ### Output: 
 
 <div align="center">
-    <img src='images/dining_phil.png'></img>
+    <img src='images/dining_phil.png' width=600></img>
 </div>
