@@ -1,3 +1,22 @@
-# IPC: Probable questions
-1. The parent process sends a string, The child process counts the number of vovels, consonants, etc.., and return the result to the parent process. The parent process displays the result. 
+# IPC
+## Summary: 
+```txt
+    child process
+    {
+        receive the data
+        read(fd index, address of the content, size in Bytes of the content received);
+        do computation
 
+        write in the similar way
+
+        close those pipe ends when not needed
+    }
+
+    parent process
+    {
+        send the data
+        wait till child returns the data
+        receive data
+        display
+    }
+```
