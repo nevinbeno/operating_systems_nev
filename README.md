@@ -1,4 +1,4 @@
-# OS - Based Algorithms
+# Operating System Algorithms & Concepts (C/Linux)
 ![C](https://img.shields.io/badge/C-Programming-blue?logo=c)
 ![C++](https://img.shields.io/badge/C++-OOP-blue?logo=cplusplus)
 ![Linux](https://img.shields.io/badge/Linux-System_Programming-black?logo=linux)
@@ -18,7 +18,7 @@
 ![POSIX](https://img.shields.io/badge/API-POSIX-brightgreen)
 ![Educational](https://img.shields.io/badge/Purpose-Educational-orange)
 ![Status](https://img.shields.io/badge/Status-Active_Development-success)
-- You will find all the algorithms associated with Operating System here. 
+A collection of Operating System algorithms and system-level programming concepts implemented in C/C++/bash on Linux.
 
 ## Architecture: 
 ```txt
