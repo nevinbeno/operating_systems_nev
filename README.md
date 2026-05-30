@@ -1,4 +1,4 @@
-# Operating System Algorithms & Concepts (C/Linux)
+# Operating System Algorithms & Concepts (C/C++/Linux)
 ![C](https://img.shields.io/badge/C-Programming-blue?logo=c)
 ![C++](https://img.shields.io/badge/C++-OOP-blue?logo=cplusplus)
 ![Linux](https://img.shields.io/badge/Linux-System_Programming-black?logo=linux)
