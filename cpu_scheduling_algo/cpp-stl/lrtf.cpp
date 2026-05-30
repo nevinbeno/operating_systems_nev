@@ -27,7 +27,7 @@ bool compare_at(const struct process& a, const struct process& b)
 bool compare_rem(const struct process* a, const process* b)
 {
     if (a->rem != b->rem)
-        return a->rem < b->rem;
+        return a->rem > b->rem;
     else
         return a->id < b->id;
 }
@@ -37,7 +37,7 @@ bool compare_id(const struct process& a, const struct process& b)
     return a.id < b.id;
 }
 
-bool srtf(vector<struct process>& p)
+bool lrtf(vector<struct process>& p)
 {
     int n_proc = p.size();
     if (n_proc < 1)
@@ -45,8 +45,6 @@ bool srtf(vector<struct process>& p)
 
     deque<struct process*> q;
     int time = 0, completed = 0;
-
-    time += p[0].at;
 
     for (int i = 0; i < n_proc; i++)
     {
@@ -58,6 +56,7 @@ bool srtf(vector<struct process>& p)
     }
 
     sort(p.begin(), p.end(), compare_at);
+    time += p[0].at;
 
     while(completed < n_proc)
     {
@@ -98,7 +97,7 @@ void display(vector<struct process>& p)
 {
     sort(p.begin(), p.end(), compare_id);
     int total_elements = p.size();
-    cout<<"== Shortest Remaining Time First =="<<endl;
+    cout<<"== Longest Remaining Time First =="<<endl;
     cout<<"PID\tAT\tBT\tCT\tTAT\tWT\tResponse Time"<<endl;
     for (int i = 0; i < total_elements; i++)
         cout<<p[i].id<<"\t"<<p[i].at<<"\t"<<p[i].bt<<"\t"<<p[i].ct<<"\t"<<p[i].tat<<"\t"<<p[i].wt<<"\t"<<p[i].rt<<endl;
@@ -126,7 +125,7 @@ int main ()
         cout<<endl;
     } 
 
-    bool answer = srtf(p);
+    bool answer = lrtf(p);
 
     cout<<endl;
 
