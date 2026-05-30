@@ -22,5 +22,5 @@
 
 ## LRTF Algorithm
 ```txt
-    Just change the sign in the Remaining time comparator. 
+    Just change the sign in the Remaining-time comparator. 
 ```
